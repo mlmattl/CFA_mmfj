@@ -20,5 +20,5 @@
     <context:component-scan base-package="nl.sapperheroes"/>
 
 <!--    <import resource="persistence.xml"/>-->
-<!--    <import resource="persistence-heroku.xml"/>-->
+    <import resource="persistence-heroku.xml"/>
 </beans>
