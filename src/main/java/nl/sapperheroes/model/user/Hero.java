@@ -3,14 +3,18 @@ package nl.sapperheroes.model.user;
 import nl.sapperheroes.model.jobs.Job;
 import nl.sapperheroes.model.jobs.JobType;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Entity
+@Table(name="hero")
 public class Hero extends User {
 
-    private List<JobType> offeredJobTypes;
+
+    //private List<JobType> offeredJobTypes;
+
+    @OneToMany
     private List<Job> jobs;
 
     public void setJobToList(Job job) {
@@ -22,13 +26,13 @@ public class Hero extends User {
         this.jobs = jobs;
     }
 
-    public List<JobType> getOfferedJobTypes() {
-        return offeredJobTypes;
-    }
-
-    public void setOfferedJobTypes(List<JobType> offeredJobTypes) {
-        this.offeredJobTypes = offeredJobTypes;
-    }
+//    public List<JobType> getOfferedJobTypes() {
+//        return offeredJobTypes;
+//    }
+//
+//    public void setOfferedJobTypes(List<JobType> offeredJobTypes) {
+//        this.offeredJobTypes = offeredJobTypes;
+//    }
 
     public List<Job> getJobs() {
         return jobs;
@@ -43,9 +47,9 @@ public class Hero extends User {
     }
 
 
-    public void offeredJobsType(JobType type) {
-        offeredJobTypes.add(type);
-    }
+//    public void offeredJobsType(JobType type) {
+//        offeredJobTypes.add(type);
+//    }
 
     @Override
     public String toString() {

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-      >
+       xmlns="http://www.springframework.org/schema/beans" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- Enable support for JPA annotations -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
@@ -11,7 +17,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost/sapperheroes?useSSL=false"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/sapperheroes?useSSL=false&amp;serverTimezone=UTC"/>
         <property name="user" value="root"/>
         <property name="password" value=""/>
 
@@ -41,6 +47,8 @@
                 <entry key="hibernate.show_sql" value="false" />
                 <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
                 <!-- Run as create once to initialize the schema -->
+                <entry key="hibernate.hbm2ddl.show_sql" value="true"/>
+                <entry key="hibernate.hbm2ddl.format_sql" value="true"/>
                 <entry key="hibernate.hbm2ddl.auto" value="create"/>
             </map>
         </property>

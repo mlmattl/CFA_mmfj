@@ -1,35 +1,29 @@
 package nl.sapperheroes.model.user;
+import javax.persistence.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import java.awt.*;
 
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    private Image image;
     private String email;
     private String password;
 
     private String firstName;
     private String lastName;
     private String street;
-    private int houseNumber;
+    private Integer houseNumber;
     private String postalCode;
     private String city;
     private String country;
     private String phoneNumber;
 
-    public Image getImage() {
-        return image;
-    }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
 
     public String getPassword() {
         return password;
@@ -123,7 +117,6 @@ public abstract class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", image=" + image +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

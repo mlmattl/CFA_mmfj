@@ -20,7 +20,7 @@ public class JobController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/{custId}")
     public ResponseEntity<Job> createJob(@RequestBody Job job, @PathVariable Integer custId){
-        jobService.createJob(job, custId);
+        jobService.createJob(job);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

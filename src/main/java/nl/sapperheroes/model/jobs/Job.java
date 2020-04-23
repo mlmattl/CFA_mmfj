@@ -1,18 +1,17 @@
 package nl.sapperheroes.model.jobs;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@DiscriminatorColumn(name = "job_type")
 public class Job {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @Enumerated(EnumType.STRING)
     private JobType type;
     private String description;
     private boolean completed;
@@ -20,10 +19,10 @@ public class Job {
 
     public Job(){};
 
-    public Job(JobType type) {
-        id++;
-        this.type = type;
-    }
+//    public Job(JobType type) {
+//        id++;
+//        this.type = type;
+//    }
 
     public Date getJobTimeAndDate() {
         return jobTimeAndDate;
